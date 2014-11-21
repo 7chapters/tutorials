@@ -14,6 +14,7 @@ import javax.jms.JMSException;
 import javax.jms.MapMessage;
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.TextMessage;
  
 public class SpringMessageReceiver implements MessageListener {
  
@@ -28,7 +29,13 @@ public class SpringMessageReceiver implements MessageListener {
 				}
 				System.out.println(mapMessage.getString("Name"));
 			} catch (JMSException e) {
-				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }else if(message instanceof TextMessage) {
+        	final TextMessage textMessage = (TextMessage) message;
+        	try {
+				System.out.println("Text Message : "+ textMessage.getText());
+			} catch (JMSException e) {
 				e.printStackTrace();
 			}
         }
